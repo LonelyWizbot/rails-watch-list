@@ -1,0 +1,9 @@
+<div class="container mt-4">
+  <h1>All movie lists</h1>
+  <ul>
+  <% @lists.each do |list| %>
+    <li><%= link_to list.name, list_path(list) %></li>
+  <% end %>
+  </ul>
+  <p><%= link_to "Create a list", new_list_path(@list), class: "btn btn-primary" %></p>
+</div>

@@ -1,0 +1,12 @@
+<div class="container mt-4">
+  <h1><%= @list.name %></h1>
+  <% @list.movies.each do |movie| %>
+    <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+    <li><%= movie.title %></li>
+    <li><%= movie.overview %></li>
+    <li><%= movie.poster_url %></li>
+    <li><%= movie.rating %></li>
+    <%= link_to "Delete bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-warning" %>
+  <% end %>
+  <p><%= link_to "All lists", lists_path, class: "btn btn-primary" %></p>
+</div>
