@@ -4,9 +4,17 @@
     <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
     <li><%= movie.title %></li>
     <li><%= movie.overview %></li>
-    <li><%= movie.poster_url %></li>
+    <li><img src="<%= movie.poster_url %>" alt="<%= movie.title %>" class="img-thumbnail"></li>
     <li><%= movie.rating %></li>
+    <li><strong>Comment:</strong> <%= bookmark.comment %></li>
     <%= link_to "Delete bookmark", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-warning" %>
   <% end %>
+  <h1>New bookmark</h1>
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.input :comment %>
+    <%= f.association :movie %>
+    <%= f.submit "Bookmark", class: "btn btn-primary" %>
+  <% end %>
+
   <p><%= link_to "All lists", lists_path, class: "btn btn-primary" %></p>
 </div>

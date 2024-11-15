@@ -4,7 +4,9 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = List.find(params[:id]) # Find the specific list
+    @bookmarks = Bookmark.where(list: @list).index_by(&:movie_id) # Preload bookmarks for efficiency
+    @bookmark = Bookmark.new(list: @list) # Create a new bookmark associated with the current list
   end
 
   def new
